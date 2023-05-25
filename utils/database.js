@@ -4,7 +4,7 @@ let isConnected = false
 
 export const connectToDB = async () => { 
     // If don't we will get warnings on the console
-    mongoose.se('strictQuery', true)
+    mongoose.set('strictQuery', true)
 
     if(isConnected) {
         console.log('MongoDB is already connected')
@@ -13,7 +13,7 @@ export const connectToDB = async () => {
 
     try {
         await mongoose.connect(process.env.MONGODB_URI, {
-            dbNmae: "share_prompt",
+            dbName: "share_prompt",
             useNewUrlParser: true,
             useUnifiedTopology: true,
         })
@@ -21,7 +21,8 @@ export const connectToDB = async () => {
         isConnected = true
 
         console.log("MongoDB conected")
+
     } catch (error) {
-        console.log(error)
+        console.log(error.message)
     }
 }
